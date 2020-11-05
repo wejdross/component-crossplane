@@ -1,0 +1,5 @@
+= Crossplane
+
+crossplane is a Commodore component to manage Crossplane.
+
+See the xref:references/parameters.adoc[parameters] reference for further details.
