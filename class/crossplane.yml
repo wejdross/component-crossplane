@@ -1,5 +1,11 @@
 parameters:
   kapitan:
+    dependencies:
+      - type: helm
+        source: https://charts.crossplane.io/alpha
+        chart_name: crossplane
+        version: ${crossplane:charts:crossplane}
+        output_path: dependencies/crossplane/helmcharts/crossplane
     compile:
       - input_paths:
           - crossplane/component/app.jsonnet
@@ -9,4 +15,18 @@ parameters:
           - crossplane/component/main.jsonnet
         input_type: jsonnet
         output_path: crossplane/
-
+      - input_type: helm
+        input_paths:
+          - crossplane/helmcharts/crossplane
+        helm_values:
+          image:
+            repository: ${crossplane:images:crossplane:image}
+            tag: ${crossplane:images:crossplane:tag}
+            pullPolicy: ${crossplane:images:crossplane:pullPolicy}
+          alpha:
+            oam:
+              enabled: false
+        helm_params:
+          release_name: ${_instance}
+          namespace: ${crossplane:namespace}
+        output_path: crossplane/01_helmchart
