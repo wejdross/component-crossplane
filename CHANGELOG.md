@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
-- …
+- Initial implementation ([#1])
 
-[Unreleased]: https://github.com/projectsyn/component-crossplane/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/projectsyn/component-crossplane/compare/cacebdd7a96f8accb0562849469858c223c37d79...HEAD
+
+[#1]: https://github.com/projectsyn/component-crossplane/pull/1
