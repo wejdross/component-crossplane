@@ -8,12 +8,27 @@ The parent key for all of the following parameters is `crossplane`.
 type:: string
 default:: `syn-crossplane`
 
-The namespace in which to deploy this component.
+The namespace in which to deploy Crossplane.
 
+== `providers`
+
+[horizontal]
+type:: dictionary
+default:: undefined
+
+A dictionary holding the https://crossplane.io/docs/v0.13/introduction/providers.html[Crossplane providers] to be installed.
+The keys of the dict are used as names for the Provider objects.
 
 == Example
 
 [source,yaml]
 ----
-namespace: example-namespace
+parameters:
+  crossplane:
+    images:
+      crossplane:
+        image: mymirror.io/crossplane/crossplane
+    providers:
+      helm:
+        package: crossplane/provider-helm:v0.3.5
 ----
