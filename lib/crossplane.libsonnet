@@ -34,6 +34,15 @@ local api_version = {
     kube._Object(api_version.pkg, 'Configuration', name),
 
   /**
+  * \brief Helper to create ControllerConfig objects.
+  *
+  * \arg The name of the ControllerConfig.
+  * \return A ControllerConfig object.
+  */
+  ControllerConfig(name):
+    kube._Object('pkg.crossplane.io/v1alpha1', 'ControllerConfig', name),
+
+  /**
   * \brief Helper to create Composition objects.
   *
   * \arg The name of the Composition.
