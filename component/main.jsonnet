@@ -13,4 +13,5 @@ local params = inv.parameters.crossplane;
     }
     for provider in std.objectFields(params.providers)
   ],
+  [if params.monitoring.enabled then '20_monitoring']: import 'monitoring.libsonnet',
 }

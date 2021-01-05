@@ -19,6 +19,25 @@ default:: undefined
 A dictionary holding the https://crossplane.io/docs/v0.13/introduction/providers.html[Crossplane providers] to be installed.
 The keys of the dict are used as names for the Provider objects.
 
+== `monitoring.enabled`
+
+[horizontal]
+type:: bool
+default:: `true`
+
+If monitoring should be enabled for this component.
+Requires the https://github.com/prometheus-operator/prometheus-operator[Prometheus Operator] to be installed.
+
+== `monitoring.prometheus_rule_labels`
+
+[horizontal]
+type:: dict
+default:: `{"prometheus":"platform"}`
+
+Labels to set on the alert rule configuration.
+Can be used to ensure prometheus-operator picks up the `PrometheusRule` object by setting appropriate labels.
+
+
 == Example
 
 [source,yaml]
@@ -31,4 +50,6 @@ parameters:
     providers:
       helm:
         package: crossplane/provider-helm:v0.3.5
+    monitoring:
+      enabled: false
 ----
