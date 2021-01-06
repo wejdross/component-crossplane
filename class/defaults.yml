@@ -8,4 +8,8 @@ parameters:
         image: docker.io/crossplane/crossplane
         tag: 'v0.14.0@sha256:de7bc5b26000817f25eb50af5d3b175be061337f7eeffee90708cc359ea5f0f9'
         pullPolicy: IfNotPresent
+    monitoring:
+      enabled: true
+      prometheus_rule_labels:
+        prometheus: platform
     providers: {}
