@@ -8,8 +8,8 @@ local kube = import 'lib/kube.libjsonnet';
 
 // Define Crossplane API versions
 local api_version = {
-  pkg: 'pkg.crossplane.io/v1beta1',
-  apiextensions: 'apiextensions.crossplane.io/v1beta1',
+  pkg: 'pkg.crossplane.io/v1',
+  apiextensions: 'apiextensions.crossplane.io/v1',
 };
 
 {

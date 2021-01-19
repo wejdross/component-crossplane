@@ -2,7 +2,7 @@ parameters:
   kapitan:
     dependencies:
       - type: helm
-        source: https://charts.crossplane.io/alpha
+        source: https://charts.crossplane.io/stable
         chart_name: crossplane
         version: ${crossplane:charts:crossplane}
         output_path: dependencies/crossplane/helmcharts/crossplane
