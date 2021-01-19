@@ -2,11 +2,11 @@ parameters:
   crossplane:
     namespace: syn-crossplane
     charts:
-      crossplane: 0.14.0
+      crossplane: 1.0.0
     images:
       crossplane:
         image: docker.io/crossplane/crossplane
-        tag: 'v0.14.0@sha256:de7bc5b26000817f25eb50af5d3b175be061337f7eeffee90708cc359ea5f0f9'
+        tag: v1.0.0@sha256:9363cd57adb9738a59dde87efb9440d2e103eb7f21d49ca5b873abe8d21fd405
         pullPolicy: IfNotPresent
     monitoring:
       enabled: true
