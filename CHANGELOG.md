@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Upgrade to Crossplane v1.0.0 ([#4])
+- Increase Crossplane CPU limits ([#5])
 - Expose Helm values ([#5])
 
 [Unreleased]: https://github.com/projectsyn/component-crossplane/compare/cacebdd7a96f8accb0562849469858c223c37d79...HEAD
