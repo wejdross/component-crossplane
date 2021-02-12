@@ -37,6 +37,13 @@ default:: `{"prometheus":"platform"}`
 Labels to set on the alert rule configuration.
 Can be used to ensure prometheus-operator picks up the `PrometheusRule` object by setting appropriate labels.
 
+== `helmValues`
+
+[horizontal]
+type:: dict
+
+Values to configure the Helm chart.
+See https://github.com/crossplane/crossplane/tree/master/cluster/charts/crossplane[the docs] for available parameters.
 
 == Example
 
@@ -52,4 +59,10 @@ parameters:
         package: crossplane/provider-helm:v0.3.5
     monitoring:
       enabled: false
+    helmValues:
+      resourcesCrossplane:
+        limits:
+          cpu: 2000m
+        requests:
+          cpu: 1000m
 ----
