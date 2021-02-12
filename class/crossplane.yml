@@ -18,14 +18,7 @@ parameters:
       - input_type: helm
         input_paths:
           - crossplane/helmcharts/crossplane
-        helm_values:
-          image:
-            repository: ${crossplane:images:crossplane:image}
-            tag: ${crossplane:images:crossplane:tag}
-            pullPolicy: ${crossplane:images:crossplane:pullPolicy}
-          alpha:
-            oam:
-              enabled: false
+        helm_values: ${crossplane:helmValues}
         helm_params:
           release_name: ${_instance}
           namespace: ${crossplane:namespace}
