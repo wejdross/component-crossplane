@@ -2,11 +2,12 @@ parameters:
   crossplane:
     namespace: syn-crossplane
     charts:
-      crossplane: 1.1.0
+      crossplane: 1.1.1
     images:
       crossplane:
-        image: docker.io/crossplane/crossplane
-        tag: v1.1.0
+        registry: docker.io
+        image: crossplane/crossplane
+        tag: v1.1.1
         pullPolicy: IfNotPresent
     monitoring:
       enabled: true
@@ -15,7 +16,7 @@ parameters:
     providers: {}
     helmValues:
       image:
-        repository: ${crossplane:images:crossplane:image}
+        repository: ${crossplane:images:crossplane:registry}/${crossplane:images:crossplane:image}
         tag: ${crossplane:images:crossplane:tag}
         pullPolicy: ${crossplane:images:crossplane:pullPolicy}
       alpha:
@@ -31,7 +32,5 @@ parameters:
           cpu: 1000m
         requests:
           cpu: 500m
-      securityContextCrossplane:
-        runAsUser: 65532
-        runAsGroup: ${crossplane:helmValues:securityContextCrossplane:runAsUser}
-      securityContextRBACManager: ${crossplane:helmValues:securityContextCrossplane}
+      metrics:
+        enabled: ${crossplane:monitoring:enabled}
