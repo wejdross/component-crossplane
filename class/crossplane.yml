@@ -23,9 +23,3 @@ parameters:
           release_name: ${_instance}
           namespace: ${crossplane:namespace}
         output_path: crossplane/01_helmchart
-      # Until Kapitan supports Helm 3 charts, CRDs need to be copied explicitly
-      # https://github.com/deepmind/kapitan/pull/648
-      - input_type: copy
-        input_paths:
-          - crossplane/helmcharts/crossplane-${crossplane:charts:crossplane}/crds/
-        output_path: crossplane/00_crds/
