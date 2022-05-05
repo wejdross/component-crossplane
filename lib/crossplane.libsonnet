@@ -12,6 +12,15 @@ local api_version = {
   apiextensions: 'apiextensions.crossplane.io/v1',
 };
 
+local sync_options = {
+  metadata+: {
+    annotations+: {
+      'argocd.argoproj.io/sync-options': 'SkipDryRunOnMissingResource=true',
+      'argocd.argoproj.io/sync-wave': '10',
+    },
+  },
+};
+
 {
   api_version: api_version,
 
@@ -22,7 +31,7 @@ local api_version = {
   * \return A Provider object.
   */
   Provider(name):
-    kube._Object(api_version.pkg, 'Provider', name),
+    kube._Object(api_version.pkg, 'Provider', name) + sync_options,
 
   /**
   * \brief Helper to create Configuration objects.
@@ -31,7 +40,7 @@ local api_version = {
   * \return A Configuration object.
   */
   Configuration(name):
-    kube._Object(api_version.pkg, 'Configuration', name),
+    kube._Object(api_version.pkg, 'Configuration', name) + sync_options,
 
   /**
   * \brief Helper to create ControllerConfig objects.
@@ -40,7 +49,7 @@ local api_version = {
   * \return A ControllerConfig object.
   */
   ControllerConfig(name):
-    kube._Object('pkg.crossplane.io/v1alpha1', 'ControllerConfig', name),
+    kube._Object('pkg.crossplane.io/v1alpha1', 'ControllerConfig', name) + sync_options,
 
   /**
   * \brief Helper to create Composition objects.
@@ -49,7 +58,7 @@ local api_version = {
   * \return A Composition object.
   */
   Composition(name):
-    kube._Object(api_version.apiextensions, 'Composition', name),
+    kube._Object(api_version.apiextensions, 'Composition', name) + sync_options,
 
   /**
   * \brief Helper to create CompositeResourceDefinition objects.
@@ -58,5 +67,5 @@ local api_version = {
   * \return A CompositeResourceDefinition object.
   */
   CompositeResourceDefinition(name):
-    kube._Object(api_version.apiextensions, 'CompositeResourceDefinition', name),
+    kube._Object(api_version.apiextensions, 'CompositeResourceDefinition', name) + sync_options,
 }
