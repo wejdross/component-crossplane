@@ -20,6 +20,12 @@ parameters:
           - crossplane/helmcharts/crossplane-${crossplane:charts:crossplane}
         helm_values: ${crossplane:helmValues}
         helm_params:
-          release_name: ${_instance}
+          name: ${_instance}
           namespace: ${crossplane:namespace}
         output_path: crossplane/01_helmchart
+  commodore:
+    postprocess:
+      filters:
+        - type: jsonnet
+          filter: postprocess/patch_operator_deployment.jsonnet
+          path: ${_instance}/01_helmchart/crossplane/templates

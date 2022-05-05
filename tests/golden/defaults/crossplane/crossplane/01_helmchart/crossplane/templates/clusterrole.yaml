@@ -7,13 +7,9 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    app.kubernetes.io/component: cloud-infrastructure-controller
-    app.kubernetes.io/instance: crossplane
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: crossplane
-    app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.7.0
-    helm.sh/chart: crossplane-1.7.0
+    chart: crossplane-1.1.1
+    heritage: Helm
+    release: crossplane
   name: crossplane
 rules: []
 ---
@@ -22,15 +18,11 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    app.kubernetes.io/component: cloud-infrastructure-controller
-    app.kubernetes.io/instance: crossplane
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: crossplane
-    app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.7.0
+    chart: crossplane-1.1.1
     crossplane.io/scope: system
-    helm.sh/chart: crossplane-1.7.0
+    heritage: Helm
     rbac.crossplane.io/aggregate-to-crossplane: 'true'
+    release: crossplane
   name: crossplane:system:aggregate-to-crossplane
 rules:
   - apiGroups:
@@ -63,13 +55,11 @@ rules:
       - ''
     resources:
       - serviceaccounts
-      - services
     verbs:
       - '*'
   - apiGroups:
       - apiextensions.crossplane.io
       - pkg.crossplane.io
-      - secrets.crossplane.io
     resources:
       - '*'
     verbs:
@@ -93,19 +83,6 @@ rules:
     resources:
       - configmaps
       - leases
-    verbs:
-      - get
-      - list
-      - create
-      - update
-      - patch
-      - watch
-      - delete
-  - apiGroups:
-      - admissionregistration.k8s.io
-    resources:
-      - validatingwebhookconfigurations
-      - mutatingwebhookconfigurations
     verbs:
       - get
       - list
