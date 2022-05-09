@@ -1,0 +1,12 @@
+:global:
+  componentName: crossplane
+  feature_goldenTests: true
+  testMatrix:
+    key: provider
+    entries:
+      - defaults
+      - openshift4
+
+docs/antora.yml:
+  name: crossplane
+  title: crossplane

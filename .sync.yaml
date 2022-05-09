@@ -1,6 +1,0 @@
-:global:
-  componentName: crossplane
-
-docs/antora.yml:
-  name: crossplane
-  title: crossplane
