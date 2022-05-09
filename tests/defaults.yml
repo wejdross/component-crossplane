@@ -1,1 +1,7 @@
-
+parameters:
+  crossplane:
+    charts:
+      crossplane: 1.7.0
+    images:
+      crossplane:
+        tag: v1.7.0
