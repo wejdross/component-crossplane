@@ -2,7 +2,7 @@
   componentName: crossplane
   feature_goldenTests: true
   testMatrix:
-    key: provider
+    key: instance
     entries:
       - defaults
       - openshift4
@@ -10,3 +10,7 @@
 docs/antora.yml:
   name: crossplane
   title: crossplane
+
+.github/workflows/test.yaml:
+  makeTarget: test -e instance=${{ matrix.instance }}
+  goldenTest_makeTarget: golden-diff -e instance=${{ matrix.instance }}
