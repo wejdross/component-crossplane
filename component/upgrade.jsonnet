@@ -19,6 +19,13 @@ local upgradeScript = importstr './upgrade/patch.sh';
 local name = 'crossplane-crd-upgrade';
 
 local role = kube.ClusterRole(name) {
+  metadata+: {
+    namespace: params.namespace,
+    annotations+: {
+      'argocd.argoproj.io/hook': 'PreSync',
+      'argocd.argoproj.io/hook-delete-policy': 'HookSucceeded',
+    },
+  },
   rules: [
     {
       apiGroups: [ 'apiextensions.k8s.io' ],
@@ -28,16 +35,29 @@ local role = kube.ClusterRole(name) {
     {
       apiGroups: [ 'pkg.crossplane.io' ],
       resources: [ 'locks' ],
-      verbs: [ 'get', 'patch' ],
+      verbs: [ 'get', 'patch', 'list' ],
     },
   ],
 };
 
 local serviceAccount = kube.ServiceAccount(name) {
-  metadata+: { namespace: params.namespace },
+  metadata+: {
+    namespace: params.namespace,
+    annotations+: {
+      'argocd.argoproj.io/hook': 'PreSync',
+      'argocd.argoproj.io/hook-delete-policy': 'HookSucceeded',
+    },
+  },
 };
 
 local roleBinding = kube.ClusterRoleBinding(name) {
+  metadata+: {
+    namespace: params.namespace,
+    annotations+: {
+      'argocd.argoproj.io/hook': 'PreSync',
+      'argocd.argoproj.io/hook-delete-policy': 'HookSucceeded',
+    },
+  },
   subjects_: [ serviceAccount ],
   roleRef_: role,
 };
