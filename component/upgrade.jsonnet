@@ -4,14 +4,14 @@ local inv = kap.inventory();
 local params = inv.parameters.crossplane;
 
 local crds = [
-    'compositeresourcedefinitions.apiextensions.crossplane.io',
-    'providerrevisions.pkg.crossplane.io',
-    'configurationrevisions.pkg.crossplane.io',
-    'controllerconfigs.pkg.crossplane.io',
-    'configurations.pkg.crossplane.io',
-    'locks.pkg.crossplane.io',
-    'compositions.apiextensions.crossplane.io',
-    'providers.pkg.crossplane.io',
+  'compositeresourcedefinitions.apiextensions.crossplane.io',
+  'providerrevisions.pkg.crossplane.io',
+  'configurationrevisions.pkg.crossplane.io',
+  'controllerconfigs.pkg.crossplane.io',
+  'configurations.pkg.crossplane.io',
+  'locks.pkg.crossplane.io',
+  'compositions.apiextensions.crossplane.io',
+  'providers.pkg.crossplane.io',
 ];
 
 local upgradeScript = importstr './upgrade/patch.sh';
