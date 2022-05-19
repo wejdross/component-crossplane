@@ -96,7 +96,7 @@ spec:
             - "#!/bin/bash\nset -e\n\n#Patch CRDS so that ArgoCD does not delete them\
               \ during upgrade\nfor crd in $CRDS_TO_PATCH; do\n\tif ! kubectl get\
               \ crd \"${crd}\" >/dev/null 2>&1; then\n\t\techo >&2 \"WARNING: Skipping\
-              \ 'blah': not found.\"\n\t\tcontinue\n\tfi\n\n\t#Remove ArgoCD managed-by\
+              \ '${crd}': not found.\"\n\t\tcontinue\n\tfi\n\n\t#Remove ArgoCD managed-by\
               \ label from the CRD\n\tkubectl label crd \"${crd}\" argocd.argoproj.io/instance-\n\
               done\n\n#Locks are not managed anymore in the helm chart therefore remove\
               \ them from ArgoCD sync cycle\nfor lock in $(kubectl get locks -o name);\
