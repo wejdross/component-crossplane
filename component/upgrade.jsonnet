@@ -37,6 +37,16 @@ local role = kube.ClusterRole(name) {
       resources: [ 'locks' ],
       verbs: [ 'get', 'patch', 'list' ],
     },
+    {
+      apiGroups: [ 'pkg.crossplane.io' ],
+      resources: [ 'providers' ],
+      verbs: [ 'get', 'patch', 'list' ],
+    },
+    {
+      apiGroups: [ 'pkg.crossplane.io' ],
+      resources: [ 'configurations' ],
+      verbs: [ 'get', 'patch', 'list' ],
+    },
   ],
 };
 
