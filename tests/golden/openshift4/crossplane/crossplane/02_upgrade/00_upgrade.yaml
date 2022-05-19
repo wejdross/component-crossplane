@@ -94,22 +94,20 @@ spec:
             - -eu
             - -c
             - "#!/bin/bash\nset -e\n\n#Patch CRDS so that ArgoCD does not delete them\
-              \ during upgrade\nfor crd in $CRDS_TO_PATCH; do\nif ! kubectl get crd\
-              \ \"${crd}\" > /dev/null 2>&1; then\n  >&2 echo \"WARNING: Skipping\
-              \ 'blah': not found.\"\n  continue\nfi\n    if [ -z \"$exists\" ]; then\n\
-              \      >&2 echo \"WARNING: Skipping '${crd}': not found.\"\n      continue\n\
-              \    fi\n    #Remove ArgoCD managed-by label from the CRD\n    kubectl\
-              \ label crd \"${crd}\" argocd.argoproj.io/instance-\ndone\n\n#Locks\
-              \ are not managed anymore in the helm chart therefore remove them from\
-              \ ArgoCD sync cycle\nfor lock in $(kubectl get locks -o name); do\n\
-              \    #Remove ArgoCD managed-by label from the Lock\n    kubectl label\
+              \ during upgrade\nfor crd in $CRDS_TO_PATCH; do\n\tif ! kubectl get\
+              \ crd \"${crd}\" >/dev/null 2>&1; then\n\t\techo >&2 \"WARNING: Skipping\
+              \ 'blah': not found.\"\n\t\tcontinue\n\tfi\n\n\t#Remove ArgoCD managed-by\
+              \ label from the CRD\n\tkubectl label crd \"${crd}\" argocd.argoproj.io/instance-\n\
+              done\n\n#Locks are not managed anymore in the helm chart therefore remove\
+              \ them from ArgoCD sync cycle\nfor lock in $(kubectl get locks -o name);\
+              \ do\n\t#Remove ArgoCD managed-by label from the Lock\n\tkubectl label\
               \ \"$lock\" argocd.argoproj.io/instance-\ndone\n\n#Patch providers so\
               \ that ArgoCD does not delete them during upgrade\nfor provider in $(kubectl\
-              \ get providers -o name); do\n    #Annotate ArgoCD sync-options\n  \
-              \  kubectl annotate \"$provider\" --overwrite argocd.argoproj.io/sync-options=Prune=false\n\
+              \ get providers -o name); do\n\t#Annotate ArgoCD sync-options\n\tkubectl\
+              \ annotate \"$provider\" --overwrite argocd.argoproj.io/sync-options=Prune=false\n\
               done\n\n#Patch configurations so that ArgoCD does not delete them during\
               \ upgrade\nfor configuration in $(kubectl get configurations -o name);\
-              \ do\n    #Annotate ArgoCD sync-options\n    kubectl annotate \"$configuration\"\
+              \ do\n\t#Annotate ArgoCD sync-options\n\tkubectl annotate \"$configuration\"\
               \ --overwrite argocd.argoproj.io/sync-options=Prune=false\ndone\n"
           command:
             - sh
