@@ -3,7 +3,10 @@ set -e
 
 #Patch CRDS so that ArgoCD does not delete them during upgrade
 for crd in $CRDS_TO_PATCH; do
-	  exists=$(kubectl get crd "${crd}" --ignore-not-found)
+if ! kubectl get crd "${crd}" > /dev/null 2>&1; then
+  >&2 echo "WARNING: Skipping 'blah': not found."
+  continue
+fi
     if [ -z "$exists" ]; then
       >&2 echo "WARNING: Skipping '${crd}': not found."
       continue
