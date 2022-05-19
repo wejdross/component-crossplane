@@ -1,4 +1,4 @@
-= Upgrade from 1.1.x to 1.2.x
+= Upgrade from v1.x to v2.x
 
 This guide describes the steps to perform an upgrade of the component from version 1.1.x to 1.2.x.
 
