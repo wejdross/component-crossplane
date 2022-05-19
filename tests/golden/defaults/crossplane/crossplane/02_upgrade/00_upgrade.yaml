@@ -24,6 +24,22 @@ rules:
       - get
       - patch
       - list
+  - apiGroups:
+      - pkg.crossplane.io
+    resources:
+      - providers
+    verbs:
+      - get
+      - patch
+      - list
+  - apiGroups:
+      - pkg.crossplane.io
+    resources:
+      - configurations
+    verbs:
+      - get
+      - patch
+      - list
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -83,10 +99,17 @@ spec:
               \ then\n      >&2 echo \"WARNING: Skipping '${crd}': not found.\"\n\
               \      continue\n    fi\n    #Remove ArgoCD managed-by label from the\
               \ CRD\n    kubectl label crd \"${crd}\" argocd.argoproj.io/instance-\n\
-              done\n\n#Patch Locks so that ArgoCD does not delete them during upgrade\n\
-              for lock in $(kubectl get locks -o name); do\n    #Remove ArgoCD managed-by\
-              \ label from the Lock\n    kubectl label \"$lock\" argocd.argoproj.io/instance-\n\
-              done\n"
+              done\n\n#Locks are not managed anymore in the helm chart therefore remove\
+              \ them from ArgoCD sync cycle\nfor lock in $(kubectl get locks -o name);\
+              \ do\n    #Remove ArgoCD managed-by label from the Lock\n    kubectl\
+              \ label \"$lock\" argocd.argoproj.io/instance-\ndone\n\n#Patch providers\
+              \ so that ArgoCD does not delete them during upgrade\nfor provider in\
+              \ $(kubectl get providers -o name); do\n    #Annotate ArgoCD sync-options\n\
+              \    kubectl annotate \"$provider\" --overwrite argocd.argoproj.io/sync-options=Prune=false\n\
+              done\n\n#Patch configurations so that ArgoCD does not delete them during\
+              \ upgrade\nfor configuration in $(kubectl get configurations -o name);\
+              \ do\n    #Annotate ArgoCD sync-options\n    kubectl annotate \"$configuration\"\
+              \ --overwrite argocd.argoproj.io/sync-options=Prune=false\ndone\n"
           command:
             - sh
           env:
@@ -97,7 +120,7 @@ spec:
                 providers.pkg.crossplane.io
             - name: HOME
               value: /upgrade
-          image: docker.io/bitnami/kubectl:1.21.2@sha256:a6c97fa2af65cf390447d96e7d0ca04f2d8c5035a50e62e1bc6b9eac28c3f576
+          image: docker.io/bitnami/kubectl:1.23.6
           imagePullPolicy: IfNotPresent
           name: crossplane-crd-upgrade
           ports: []
