@@ -2,13 +2,17 @@ parameters:
   crossplane:
     namespace: syn-crossplane
     charts:
-      crossplane: 1.1.1
+      crossplane: 1.7.1
     images:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.1.1
+        tag: v1.7.1
         pullPolicy: IfNotPresent
+      kubectl:
+        registry: docker.io
+        image: bitnami/kubectl
+        tag: '1.23.6'
     monitoring:
       enabled: true
       prometheus_rule_labels:

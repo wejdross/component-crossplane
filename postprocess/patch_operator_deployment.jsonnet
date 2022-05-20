@@ -3,6 +3,9 @@ local inv = com.inventory();
 
 local helmchart_dir = std.extVar('output_path');
 local on_openshift4 = inv.parameters.facts.distribution;
+local run_as_user = {
+  runAsUser: null,
+};
 
 local fixup(obj) =
   if obj.kind == 'Deployment' then
@@ -12,11 +15,15 @@ local fixup(obj) =
           spec+: {
             containers: [
               c {
-                securityContext+: {
-                  runAsUser: null,
-                },
+                securityContext+: run_as_user,
               }
               for c in obj.spec.template.spec.containers
+            ],
+            initContainers: [
+              c {
+                securityContext+: run_as_user,
+              }
+              for c in obj.spec.template.spec.initContainers
             ],
           },
         },
