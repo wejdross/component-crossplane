@@ -5,3 +5,8 @@ spec:
         - /rules
       kind: ClusterRole
       name: crossplane
+    - group: ''
+      jsonPointers:
+        - /imagePullSecrets
+      kind: ServiceAccount
+      name: ''
