@@ -7,9 +7,13 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
-    release: crossplane
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
   name: crossplane-admin
 ---
 aggregationRule:
@@ -21,9 +25,13 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
-    release: crossplane
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
   name: crossplane-edit
 ---
 aggregationRule:
@@ -35,9 +43,13 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
-    release: crossplane
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
   name: crossplane-view
 ---
 aggregationRule:
@@ -49,9 +61,13 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
-    release: crossplane
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
   name: crossplane-browse
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -59,10 +75,14 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-admin: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-admin
 rules:
   - apiGroups:
@@ -125,10 +145,14 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-edit: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-edit
 rules:
   - apiGroups:
@@ -174,10 +198,14 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-view: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-view
 rules:
   - apiGroups:
@@ -221,10 +249,14 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-browse: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-browse
 rules:
   - apiGroups:
@@ -249,11 +281,15 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-ns-admin: 'true'
     rbac.crossplane.io/base-of-ns-admin: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-ns-admin
 rules:
   - apiGroups:
@@ -290,11 +326,15 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-ns-edit: 'true'
     rbac.crossplane.io/base-of-ns-edit: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-ns-edit
 rules:
   - apiGroups:
@@ -317,11 +357,15 @@ kind: ClusterRole
 metadata:
   labels:
     app: crossplane
-    chart: crossplane-1.1.1
-    heritage: Helm
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
     rbac.crossplane.io/aggregate-to-ns-view: 'true'
     rbac.crossplane.io/base-of-ns-view: 'true'
-    release: crossplane
   name: crossplane:aggregate-to-ns-view
 rules:
   - apiGroups:
@@ -336,6 +380,15 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  labels:
+    app: crossplane
+    app.kubernetes.io/component: cloud-infrastructure-controller
+    app.kubernetes.io/instance: crossplane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: crossplane
+    app.kubernetes.io/part-of: crossplane
+    app.kubernetes.io/version: 1.7.1
+    helm.sh/chart: crossplane-1.7.1
   name: crossplane-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
