@@ -33,7 +33,9 @@ jobs:
       matrix:
         instance:
           - defaults
+          - defaults-with-provider
           - openshift4
+          - openshift4-with-provider
     defaults:
       run:
         working-directory: ${{ env.COMPONENT_NAME }}
@@ -49,7 +51,9 @@ jobs:
       matrix:
         instance:
           - defaults
+          - defaults-with-provider
           - openshift4
+          - openshift4-with-provider
     defaults:
       run:
         working-directory: ${{ env.COMPONENT_NAME }}

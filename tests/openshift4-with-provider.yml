@@ -1,0 +1,7 @@
+parameters:
+  facts:
+    distribution: openshift4
+  crossplane:
+    providers:
+      provider-helm:
+        package: crossplane/provider-helm:v0.9.0

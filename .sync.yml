@@ -5,7 +5,9 @@
     key: instance
     entries:
       - defaults
+      - defaults-with-provider
       - openshift4
+      - openshift4-with-provider
 
 docs/antora.yml:
   name: crossplane
