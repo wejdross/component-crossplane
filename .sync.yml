@@ -9,10 +9,6 @@
       - openshift4
       - openshift4-with-provider
 
-docs/antora.yml:
-  name: crossplane
-  title: crossplane
-
 .github/workflows/test.yaml:
   makeTarget: test -e instance=${{ matrix.instance }}
   goldenTest_makeTarget: golden-diff -e instance=${{ matrix.instance }}
