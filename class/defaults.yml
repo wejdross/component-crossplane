@@ -18,6 +18,9 @@ parameters:
       prometheus_rule_labels:
         prometheus: platform
     providers: {}
+    serviceAccounts: {}
+    clusterRoles: {}
+    clusterRoleBindings: {}
     helmValues:
       image:
         repository: ${crossplane:images:crossplane:registry}/${crossplane:images:crossplane:image}

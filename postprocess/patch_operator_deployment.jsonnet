@@ -1,7 +1,6 @@
 local com = import 'lib/commodore.libjsonnet';
 local inv = com.inventory();
 
-local helmchart_dir = std.extVar('output_path');
 local on_openshift4 = inv.parameters.facts.distribution;
 local run_as_user = {
   runAsUser: null,
