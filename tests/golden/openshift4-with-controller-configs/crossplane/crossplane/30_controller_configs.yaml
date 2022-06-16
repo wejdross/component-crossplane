@@ -1,0 +1,56 @@
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-aws
+  name: provider-aws
+spec:
+  image: docker.io/repository/image-two:latest
+  podSecurityContext: {}
+  securityContext: {}
+  serviceAccountName: provider-aws
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-azure
+  name: provider-azure
+spec:
+  image: docker.io/repository/image-tree:latest
+  podSecurityContext: {}
+  securityContext: {}
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-helm
+  name: provider-helm
+spec:
+  image: docker.io/repository/image-one:latest
+  podSecurityContext: {}
+  securityContext: {}
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-gke
+  name: provider-gke
+spec:
+  podSecurityContext: {}
+  securityContext: {}
+  serviceAccountName: provider-gke

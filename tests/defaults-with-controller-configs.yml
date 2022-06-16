@@ -1,0 +1,77 @@
+parameters:
+  crossplane:
+    namespace: syn-crossplane
+    charts:
+      crossplane: 1.7.1
+    images:
+      crossplane:
+        registry: docker.io
+        image: crossplane/crossplane
+        tag: v1.7.1
+        pullPolicy: IfNotPresent
+      kubectl:
+        registry: docker.io
+        image: bitnami/kubectl
+        tag: '1.23.6'
+    monitoring:
+      enabled: true
+      prometheus_rule_labels:
+        prometheus: platform
+    providers:
+      provider-aws:
+        package: crossplane/provider-aws:v1.0.0
+      provider-gke:
+        package: crossplane/provider-gke:v2.0.0
+    serviceAccounts:
+      provider-aws: {}
+      lonely-service-account: {}
+      provider-gke: {}
+    clusterRoles:
+      "crossplane:provider:provider-aws:reader":
+        rules:
+          - verbs:
+              - '*'
+            apiGroups:
+              - k8up.io
+            resources:
+              - schedules
+    clusterRoleBindings:
+      "crossplane:provider:provider-aws:reader":
+        roleRef:
+          kind: ClusterRole
+          name: crossplane:provider:provider-aws:reader
+        subjects:
+          - kind: ServiceAccount
+            name: provider-aws
+            namespace: syn-crossplane
+    controllerConfigs:
+      provider-helm:
+        spec:
+          image: docker.io/repository/image-one:latest
+      provider-aws:
+        spec:
+          image: docker.io/repository/image-two:latest
+          serviceAccountName: overwritten-by-service-provider-aws
+      provider-azure:
+        spec:
+          image: docker.io/repository/image-tree:latest
+    helmValues:
+      image:
+        repository: ${crossplane:images:crossplane:registry}/${crossplane:images:crossplane:image}
+        tag: ${crossplane:images:crossplane:tag}
+        pullPolicy: ${crossplane:images:crossplane:pullPolicy}
+      alpha:
+        oam:
+          enabled: false
+      resourcesCrossplane:
+        limits:
+          cpu: 1000m
+        requests:
+          cpu: 500m
+      resourcesRBACManager:
+        limits:
+          cpu: 1000m
+        requests:
+          cpu: 500m
+      metrics:
+        enabled: ${crossplane:monitoring:enabled}
