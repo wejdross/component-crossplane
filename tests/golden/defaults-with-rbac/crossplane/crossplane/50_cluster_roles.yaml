@@ -1,0 +1,32 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations: {}
+  labels:
+    name: crossplane-provider-provider-aws-reader
+  name: crossplane:provider:provider-aws:reader
+rules:
+  - apiGroups:
+      - k8up.io
+    resources:
+      - schedules
+    verbs:
+      - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations: {}
+  labels:
+    name: crossplane-provider-provider-helm-deployer
+  name: crossplane:provider:provider-helm:deployer
+rules:
+  - apiGroups:
+      - ''
+      - apps
+      - batch
+      - helm.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - '*'

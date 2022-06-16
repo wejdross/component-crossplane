@@ -37,6 +37,76 @@ default:: `{"prometheus":"platform"}`
 Labels to set on the alert rule configuration.
 Can be used to ensure prometheus-operator picks up the `PrometheusRule` object by setting appropriate labels.
 
+== `serviceAccounts`
+
+[horizontal]
+type:: dict
+default:: `{}`
+example::
++
+[source,yaml]
+----
+provider-helm: {}
+----
+
+This parameter allows users to deploy arbitrary service accounts.
+Each entry is transformed into a ServiceAccount resource.
+The key is used as the name of the resulting resource.
+The provided value is merged with an empty ServiceAccount resource.
+The component doesn't validate the provided service account configuration.
+
+A ServiceAccount name which matches a Provider name will generate a ControllerConfig resource for that provider.
+
+== `clusterRoles`
+
+[horizontal]
+type:: dict
+default:: `{}`
+example::
++
+[source,yaml]
+----
+"cluster-role-name":
+  rules:
+    - verbs:
+        - '*'
+      apiGroups:
+        - k8up.io
+      resources:
+        - schedules
+----
+
+This parameter allows users to deploy arbitrary cluster roles.
+Each entry is transformed into a ClusterRole resource.
+The key is used as the name of the resulting resource.
+The provided value is merged with an empty ClusterRole resource.
+The component doesn't validate the provided cluster role configuration.
+
+== `clusterRoleBindings`
+
+[horizontal]
+type:: dict
+default:: `{}`
+example::
++
+[source,yaml]
+----
+"cluster-role-binding-name":
+  roleRef:
+    kind: ClusterRole
+    name: cluster-role-name
+  subjects:
+    - kind: ServiceAccount
+      name: any-sa
+      namespace: any-namespace
+----
+
+This parameter allows users to deploy arbitrary cluster role bindings.
+Each entry is transformed into a ClusterRoleBinding resource.
+The key is used as the name of the resulting resource.
+The provided value is merged with an empty ClusterRoleBinding resource.
+The component doesn't validate the provided cluster role binding configuration.
+
 == `helmValues`
 
 [horizontal]
