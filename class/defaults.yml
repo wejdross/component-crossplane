@@ -21,6 +21,7 @@ parameters:
     serviceAccounts: {}
     clusterRoles: {}
     clusterRoleBindings: {}
+    controllerConfigs: {}
     helmValues:
       image:
         repository: ${crossplane:images:crossplane:registry}/${crossplane:images:crossplane:image}

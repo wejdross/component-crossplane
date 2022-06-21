@@ -1,0 +1,27 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-aws
+  name: provider-aws
+spec:
+  controllerConfigRef:
+    name: provider-aws
+  package: crossplane/provider-aws:v1.0.0
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-gke
+  name: provider-gke
+spec:
+  controllerConfigRef:
+    name: provider-gke
+  package: crossplane/provider-gke:v2.0.0

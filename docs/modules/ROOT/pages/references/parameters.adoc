@@ -107,6 +107,29 @@ The key is used as the name of the resulting resource.
 The provided value is merged with an empty ClusterRoleBinding resource.
 The component doesn't validate the provided cluster role binding configuration.
 
+== `controllerConfigs`
+
+[horizontal]
+type:: dict
+default:: `{}`
+example::
++
+[source,yaml]
+----
+"controller-config-name":
+  spec:
+    serviceAccountName: my-service
+    image: docker.io/repo/image.latest
+----
+
+This parameter allows users to deploy arbitrary controller configs.
+Each entry is transformed into a ControllerConfig resource.
+The key is used as the name of the resulting resource.
+The provided value is merged with an empty ControllerConfig resource.
+The component doesn't validate the provided ControllerConfig spec.
+
+If a key in `controllerConfigs` matches a key in `parameters.crossplane.serviceAccounts`, then the ControllerConfig's `spec.serviceAccountName` is overwritten and set equal to the matching key of `parameters.crossplane.serviceAccounts`.
+
 == `helmValues`
 
 [horizontal]
