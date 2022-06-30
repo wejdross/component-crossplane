@@ -1,0 +1,13 @@
+parameters:
+  crossplane:
+    providerConfigs:
+      provider-name-one:
+        apiVersion: helm.crossplane.io/v1beta1
+        spec:
+          credentials:
+            source: InjectedIdentity
+      provider-name-two:
+        apiVersion: aws.crossplane.io/v1
+        spec:
+          credentials:
+            source: InjectedIdentity

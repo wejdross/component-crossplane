@@ -37,6 +37,13 @@ local service_accounts = com.generateResources(params.serviceAccounts, kube.Serv
 local cluster_roles = com.generateResources(params.clusterRoles, kube.ClusterRole);
 local cluster_role_bindings = com.generateResources(params.clusterRoleBindings, kube.ClusterRoleBinding);
 
+local provider_configs = [
+  // apiVersion is a required field for each ProviderConfig
+  assert provider_config.apiVersion != '' : 'apiVersion is mandatory in ProviderConfig ' + provider_config.metadata.name;
+  provider_config
+  for provider_config in com.generateResources(params.providerConfigs, crossplane.ProviderConfig)
+];
+
 local controller_configs =
   /* ControllerConfig resources generated from params.controllerConfigs adjusted by facts.distribution and
    params.serviceAccounts
@@ -75,4 +82,5 @@ local providers = [
   [if std.length(service_accounts) > 0 then '40_service_accounts']: service_accounts,
   [if std.length(cluster_roles) > 0 then '50_cluster_roles']: cluster_roles,
   [if std.length(cluster_role_bindings) > 0 then '60_cluster_role_bindings']: cluster_role_bindings,
+  [if std.length(provider_configs) > 0 then '70_provider_configs']: provider_configs,
 }

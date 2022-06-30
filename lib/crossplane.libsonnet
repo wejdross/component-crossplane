@@ -34,6 +34,15 @@ local sync_options = {
     kube._Object(api_version.pkg, 'Provider', name) + sync_options,
 
   /**
+  * \brief Helper to create ProviderConfig objects.
+  *
+  * \arg The name of the ProviderConfig.
+  * \return A ProviderConfig object.
+  */
+  ProviderConfig(name):
+    kube._Object('', 'ProviderConfig', name) + sync_options,
+
+  /**
   * \brief Helper to create Configuration objects.
   *
   * \arg The name of the Configuration.

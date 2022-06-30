@@ -1,0 +1,25 @@
+apiVersion: helm.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-name-one
+  name: provider-name-one
+spec:
+  credentials:
+    source: InjectedIdentity
+---
+apiVersion: aws.crossplane.io/v1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: provider-name-two
+  name: provider-name-two
+spec:
+  credentials:
+    source: InjectedIdentity

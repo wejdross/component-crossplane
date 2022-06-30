@@ -130,6 +130,29 @@ The component doesn't validate the provided ControllerConfig spec.
 
 If a key in `controllerConfigs` matches a key in `parameters.crossplane.serviceAccounts`, then the ControllerConfig's `spec.serviceAccountName` is overwritten and set equal to the matching key of `parameters.crossplane.serviceAccounts`.
 
+== `providerConfigs`
+
+[horizontal]
+type:: dict
+default:: `{}`
+example::
++
+[source,yaml]
+----
+"provider-name-two": <1>
+  apiVersion: helm.crossplane.io/v1beta1 <2>
+  spec: <3>
+    credentials:
+      source: InjectedIdentity
+----
+<1> The key is used as the name of the resulting resource.
+<2> Setting `apiVersion` defines in which the API group the ProviderConfig belongs to.
+<3> The provided spec is merged with an empty ProviderConfig resource.
+
+This parameter allows users to deploy arbitrary provider configs.
+Each entry is transformed into a ProviderConfig resource.
+The component doesn't validate the provided ProviderConfig spec.
+
 == `helmValues`
 
 [horizontal]
