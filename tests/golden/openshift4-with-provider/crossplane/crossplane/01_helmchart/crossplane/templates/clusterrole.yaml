@@ -12,10 +12,9 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.7.1
-    helm.sh/chart: crossplane-1.7.1
+    app.kubernetes.io/version: 1.9.0
+    helm.sh/chart: crossplane-1.9.0
   name: crossplane
-rules: []
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -27,9 +26,9 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.7.1
+    app.kubernetes.io/version: 1.9.0
     crossplane.io/scope: system
-    helm.sh/chart: crossplane-1.7.1
+    helm.sh/chart: crossplane-1.9.0
     rbac.crossplane.io/aggregate-to-crossplane: 'true'
   name: crossplane:system:aggregate-to-crossplane
 rules:
