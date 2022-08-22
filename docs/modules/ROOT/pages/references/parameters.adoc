@@ -169,7 +169,7 @@ parameters:
   crossplane:
     images:
       crossplane:
-        image: mymirror.io/crossplane/crossplane
+        registry: mymirror.io
     providers:
       helm:
         package: crossplane/provider-helm:v0.3.5
