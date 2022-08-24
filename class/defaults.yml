@@ -43,3 +43,5 @@ parameters:
           cpu: 500m
       metrics:
         enabled: ${crossplane:monitoring:enabled}
+      webhooks:
+        enabled: true
