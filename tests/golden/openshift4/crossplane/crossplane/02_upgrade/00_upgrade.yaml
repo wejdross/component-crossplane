@@ -119,7 +119,7 @@ spec:
                 providers.pkg.crossplane.io
             - name: HOME
               value: /upgrade
-          image: docker.io/bitnami/kubectl:1.24.4
+          image: docker.io/bitnami/kubectl:1.25.3
           imagePullPolicy: IfNotPresent
           name: crossplane-crd-upgrade
           ports: []
