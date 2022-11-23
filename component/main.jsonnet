@@ -2,6 +2,7 @@ local com = import 'lib/commodore.libjsonnet';
 local crossplane = import 'lib/crossplane.libsonnet';
 local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
+local prometheus = import 'lib/prometheus.libsonnet';
 local inv = kap.inventory();
 
 local params = inv.parameters.crossplane;
@@ -100,8 +101,18 @@ local rbacFinalizerRoleBinding = kube.ClusterRoleBinding('crossplane-rbac-manage
   ],
 };
 
+local namespace =
+  if params.monitoring.enabled && std.member(inv.applications, 'prometheus') then
+    if params.monitoring.instance != null then
+      prometheus.RegisterNamespace(kube.Namespace(params.namespace), params.monitoring.instance)
+    else
+      prometheus.RegisterNamespace(kube.Namespace(params.namespace))
+  else
+    kube.Namespace(params.namespace)
+;
+
 {
-  '00_namespace': kube.Namespace(params.namespace),
+  '00_namespace': namespace,
   '01_rbac_finalizer_clusterrole': rbacFinalizerRole,
   '01_rbac_finalizer_clusterrolebinding': rbacFinalizerRoleBinding,
   [if std.length(providers) > 0 then '10_providers']: providers,

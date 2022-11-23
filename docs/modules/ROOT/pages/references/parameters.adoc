@@ -37,6 +37,14 @@ default:: `{"prometheus":"platform"}`
 Labels to set on the alert rule configuration.
 Can be used to ensure prometheus-operator picks up the `PrometheusRule` object by setting appropriate labels.
 
+== `monitoring.instance`
+
+[horizontal]
+type:: string
+default:: `null`
+
+Which prometheus instance to use when setting the namespace label. If not set it will use the instance defined in `prometheus.defaultInstance`
+
 == `serviceAccounts`
 
 [horizontal]
