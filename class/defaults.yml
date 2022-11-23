@@ -1,6 +1,7 @@
 parameters:
   crossplane:
     namespace: syn-crossplane
+    namespaceLabels: {}
     charts:
       crossplane: 1.1.1
     images:
@@ -13,6 +14,7 @@ parameters:
       enabled: true
       prometheus_rule_labels:
         prometheus: platform
+      instance: null
     providers: {}
     helmValues:
       image:
