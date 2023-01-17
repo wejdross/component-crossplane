@@ -2,12 +2,12 @@ parameters:
   crossplane:
     namespace: syn-crossplane
     charts:
-      crossplane: 1.9.0
+      crossplane: 1.10.0
     images:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.9.0
+        tag: v1.10.0
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
