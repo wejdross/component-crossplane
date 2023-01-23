@@ -74,8 +74,35 @@ local providers = [
   for provider in std.objectFields(params.providers)
 ];
 
+local rbacFinalizerRole = kube.ClusterRole('crossplane-rbac-manager:finalizer') {
+  rules+: [
+    {
+      apiGroups: [
+        'pkg.crossplane.io',
+      ],
+      resources: [
+        '*/finalizers',
+      ],
+      verbs: [ '*' ],
+    },
+  ],
+
+};
+local rbacFinalizerRoleBinding = kube.ClusterRoleBinding('crossplane-rbac-manager:finalizer') {
+  roleRef_: rbacFinalizerRole,
+  subjects: [
+    {
+      kind: 'ServiceAccount',
+      name: 'rbac-manager',
+      namespace: params.namespace,
+    },
+  ],
+};
+
 {
   '00_namespace': kube.Namespace(params.namespace),
+  '01_rbac_finalizer_clusterrole': rbacFinalizerRole,
+  '01_rbac_finalizer_clusterrolebinding': rbacFinalizerRoleBinding,
   [if std.length(providers) > 0 then '10_providers']: providers,
   [if params.monitoring.enabled then '20_monitoring']: import 'monitoring.libsonnet',
   [if std.length(controller_configs) > 0 then '30_controller_configs']: controller_configs,
