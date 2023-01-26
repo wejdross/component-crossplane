@@ -1,2 +1,5 @@
 * xref:index.adoc[Home]
 * xref:references/parameters.adoc[Parameters]
+
+.How To
+* xref:how-tos/upgrade-1.2.x-and-subsequet.adoc[Upgrade version]

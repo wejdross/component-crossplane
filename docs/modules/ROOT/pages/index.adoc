@@ -1,5 +1,13 @@
 = Crossplane
 
+[discrete]
+== Introduction
+
 crossplane is a Commodore component to manage Crossplane.
 
 See the xref:references/parameters.adoc[parameters] reference for further details.
+
+[discrete]
+== Documentation
+
+How-to guides:: _Problem-oriented_: step-by-step guides to achieve a goal.
