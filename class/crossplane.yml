@@ -23,11 +23,6 @@ parameters:
           name: ${_instance}
           namespace: ${crossplane:namespace}
         output_path: crossplane/01_helmchart
-      - input_type: jsonnet
-        input_paths:
-          - crossplane/component/upgrade.jsonnet
-        output_type: yaml
-        output_path: crossplane/02_upgrade
   commodore:
     postprocess:
       filters:
