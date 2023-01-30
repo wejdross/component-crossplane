@@ -45,3 +45,5 @@ parameters:
         enabled: ${crossplane:monitoring:enabled}
       webhooks:
         enabled: true
+      rbacManager:
+        managementPolicy: Basic

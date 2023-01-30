@@ -19,3 +19,5 @@
 /_public
 
 # Additional entries
+/.kind
+/.work

@@ -17,6 +17,14 @@ Run the `make docs-serve` command in the root of the project, and then browse to
 
 After writing the documentation, please use the `make docs-vale` command and correct any warnings raised by the tool.
 
+## Local installation for testing purposes
+
+`make install` allows you to install the operator in a local (kind) cluster.
+
+The target installs the component Crossplane in a local cluster. This component uses [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator#quickstart).
+
+Note: the namespace in the ClusterRoleBinding needs to be updated as we're deploying in a namespace other than the default namespace, that's why we have `kind/prometheus-operator-cluster-role-binding.yaml`
+
 ## Contributing and license
 
 This library is licensed under [BSD-3-Clause](LICENSE).

@@ -7,6 +7,16 @@
 # The component name is hard-coded from the template
 COMPONENT_NAME ?= crossplane
 
+PROJECT_ROOT_DIR = .
+PROJECT_NAME ?= crossplane
+PROJECT_OWNER ?= projectsyn
+
+## BUILD:go
+BIN_FILENAME ?= $(PROJECT_NAME)
+go_bin ?= $(PWD)/.work/bin
+$(go_bin):
+	@mkdir -p $@
+
 git_dir         ?= $(shell git rev-parse --git-common-dir)
 compiled_path   ?= compiled/$(COMPONENT_NAME)/$(COMPONENT_NAME)
 root_volume     ?= -v "$${PWD}:/$(COMPONENT_NAME)"
@@ -52,9 +62,17 @@ JB_CMD         ?= $(DOCKER_CMD) $(DOCKER_ARGS) --entrypoint /usr/local/bin/jb do
 GOLDEN_FILES    ?= $(shell find tests/golden/$(instance) -type f)
 
 KUBENT_FILES    ?= $(shell echo "$(GOLDEN_FILES)" | sed 's/ /,/g')
-KUBENT_ARGS     ?= -c=false --helm2=false --helm3=false -e
+KUBENT_ARGS     ?= -c=false --helm3=false -e
 KUBENT_IMAGE    ?= ghcr.io/doitintl/kube-no-trouble:latest
 KUBENT_DOCKER   ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) --entrypoint=/app/kubent $(KUBENT_IMAGE)
 
 instance ?= defaults
 test_instances = tests/defaults.yml tests/defaults-with-provider.yml tests/openshift4.yml tests/openshift4-with-provider.yml
+
+## KIND setup (local testing)
+
+# https://hub.docker.com/r/kindest/node/tags
+KIND_NODE_VERSION ?= v1.24.0
+KIND_IMAGE ?= docker.io/kindest/node:$(KIND_NODE_VERSION)
+KIND_KUBECONFIG ?= $(kind_dir)/kind-kubeconfig-$(KIND_NODE_VERSION)
+KIND_CLUSTER ?= $(PROJECT_NAME)-$(KIND_NODE_VERSION)
