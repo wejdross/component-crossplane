@@ -12,6 +12,7 @@ SHELL := bash
 .SUFFIXES:
 
 include Makefile.vars.mk
+include kind/kind.mk
 
 .PHONY: help
 help: ## Show this help
@@ -86,6 +87,14 @@ lint_kubent_all: $(test_instances) ## Lint deprecated Kubernetes API versions fo
 .PHONY: $(test_instances)
 $(test_instances):
 	$(MAKE) $(recursive_target) -e instance=$(basename $(@F))
+
+.PHONY: install
+install: export KUBECONFIG = $(KIND_KUBECONFIG)
+install: kind-setup .compile ## Install operator in a local cluster and install Prometheus Operator using the *-bundle.yaml file in the Prometheus Operator GitHub repository
+	kubectl create ns syn-crossplane
+	kubectl create -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
+	kubectl apply -f kind/prometheus-operator-cluster-role-binding.yaml
+	kubectl apply -R -n syn-crossplane -f compiled/crossplane/crossplane
 
 .PHONY: clean
 clean: ## Clean the project
