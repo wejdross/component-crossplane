@@ -8,10 +8,11 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.10.0
-    helm.sh/chart: crossplane-1.10.0
+    app.kubernetes.io/version: 1.11.0
+    helm.sh/chart: crossplane-1.11.0
     release: crossplane
   name: crossplane
+  namespace: syn-crossplane
 spec:
   replicas: 1
   selector:
@@ -33,8 +34,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: crossplane
         app.kubernetes.io/part-of: crossplane
-        app.kubernetes.io/version: 1.10.0
-        helm.sh/chart: crossplane-1.10.0
+        app.kubernetes.io/version: 1.11.0
+        helm.sh/chart: crossplane-1.11.0
         release: crossplane
     spec:
       containers:
@@ -42,6 +43,16 @@ spec:
             - core
             - start
           env:
+            - name: GOMAXPROCS
+              valueFrom:
+                resourceFieldRef:
+                  containerName: crossplane
+                  resource: limits.cpu
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  containerName: crossplane
+                  resource: limits.memory
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -52,7 +63,7 @@ spec:
               value: webhook-tls-secret
             - name: WEBHOOK_TLS_CERT_DIR
               value: /webhook/tls
-          image: docker.io/crossplane/crossplane:v1.10.0
+          image: docker.io/crossplane/crossplane:v1.11.0
           imagePullPolicy: IfNotPresent
           name: crossplane
           ports:
@@ -82,6 +93,16 @@ spec:
             - core
             - init
           env:
+            - name: GOMAXPROCS
+              valueFrom:
+                resourceFieldRef:
+                  containerName: crossplane-init
+                  resource: limits.cpu
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  containerName: crossplane-init
+                  resource: limits.memory
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -100,7 +121,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: WEBHOOK_SERVICE_PORT
               value: '9443'
-          image: docker.io/crossplane/crossplane:v1.10.0
+          image: docker.io/crossplane/crossplane:v1.11.0
           imagePullPolicy: IfNotPresent
           name: crossplane-init
           resources:

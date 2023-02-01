@@ -15,4 +15,4 @@ An automated PreSync Hook during migration will ensure that CRDs aren't deleted.
  ControllerConfig CRD hasn't received any updates.
 ====
 
-For more information, please refer to https://docs.crossplane.io/v1.10/guides/upgrading-to-v1.x/#upgrading-to-v12x-and-subsequent-versions
+For more information, please refer to https://docs.crossplane.io/v1.11/guides/upgrading-to-v1.x/#upgrading-to-v12x-and-subsequent-versions
