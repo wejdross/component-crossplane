@@ -79,6 +79,7 @@ local rbacFinalizerRole = kube.ClusterRole('crossplane-rbac-manager:finalizer') 
     {
       apiGroups: [
         'pkg.crossplane.io',
+        'apiextensions.crossplane.io',
       ],
       resources: [
         '*/finalizers',
