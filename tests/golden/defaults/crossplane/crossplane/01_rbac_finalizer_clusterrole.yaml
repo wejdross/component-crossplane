@@ -8,6 +8,7 @@ metadata:
 rules:
   - apiGroups:
       - pkg.crossplane.io
+      - apiextensions.crossplane.io
     resources:
       - '*/finalizers'
     verbs:
