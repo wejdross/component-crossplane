@@ -2,12 +2,12 @@ parameters:
   crossplane:
     namespace: syn-crossplane
     charts:
-      crossplane: 1.11.0
+      crossplane: 1.11.2
     images:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.11.0
+        tag: v1.11.2
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -47,3 +47,8 @@ parameters:
         enabled: true
       rbacManager:
         managementPolicy: Basic
+      xfn:
+        enabled: true
+      args:
+        - '--enable-composition-functions'
+        - '--enable-environment-configs'

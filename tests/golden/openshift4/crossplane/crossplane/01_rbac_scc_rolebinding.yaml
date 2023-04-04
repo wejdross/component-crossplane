@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations: {}
+  labels:
+    name: crossplane-rbac-compfunctions-scc
+  name: crossplane-rbac:compfunctions:scc
+  namespace: syn-crossplane
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: crossplane-rbac:compfunctions:scc
+subjects:
+  - kind: ServiceAccount
+    name: crossplane
+    namespace: syn-crossplane

@@ -100,10 +100,43 @@ local rbacFinalizerRoleBinding = kube.ClusterRoleBinding('crossplane-rbac-manage
   ],
 };
 
+local rbacSCCOpenShiftRole = kube.Role('crossplane-rbac:compfunctions:scc') {
+  metadata+: {
+    namespace: params.namespace,
+  },
+  rules+: [
+    {
+      apiGroups: [
+        'security.openshift.io',
+      ],
+      resources: [
+        'anyuid',
+      ],
+      verbs: [ 'use' ],
+    },
+  ],
+};
+
+local rbacSCCOpenShiftRoleBinding = kube.RoleBinding('crossplane-rbac:compfunctions:scc') {
+  metadata+: {
+    namespace: params.namespace,
+  },
+  roleRef_: rbacSCCOpenShiftRole,
+  subjects: [
+    {
+      kind: 'ServiceAccount',
+      name: 'crossplane',
+      namespace: params.namespace,
+    },
+  ],
+};
+
 {
   '00_namespace': kube.Namespace(params.namespace),
   '01_rbac_finalizer_clusterrole': rbacFinalizerRole,
   '01_rbac_finalizer_clusterrolebinding': rbacFinalizerRoleBinding,
+  [if on_openshift4 then '01_rbac_scc_role']: rbacSCCOpenShiftRole,
+  [if on_openshift4 then '01_rbac_scc_rolebinding']: rbacSCCOpenShiftRoleBinding,
   [if std.length(providers) > 0 then '10_providers']: providers,
   [if params.monitoring.enabled then '20_monitoring']: import 'monitoring.libsonnet',
   [if std.length(controller_configs) > 0 then '30_controller_configs']: controller_configs,
