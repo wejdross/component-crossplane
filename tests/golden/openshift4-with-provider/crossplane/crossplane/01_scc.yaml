@@ -1,0 +1,28 @@
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegeEscalation: true
+allowPrivilegedContainer: true
+allowedCapabilities:
+  - '*'
+allowedUnsafeSysctls:
+  - '*'
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: crossplane-xfn
+readOnlyRootFilesystem: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+seccompProfiles:
+  - '*'
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:syn-crossplane:crossplane
+volumes:
+  - '*'

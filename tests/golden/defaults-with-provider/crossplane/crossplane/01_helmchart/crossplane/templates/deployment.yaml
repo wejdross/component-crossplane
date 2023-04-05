@@ -44,6 +44,7 @@ spec:
             - start
             - --enable-composition-functions
             - --enable-environment-configs
+            - --debug
           env:
             - name: GOMAXPROCS
               valueFrom:
@@ -92,6 +93,7 @@ spec:
               name: webhook-tls-secret
         - args:
             - start
+            - --debug
           env:
             - name: GOMAXPROCS
               valueFrom:
@@ -115,8 +117,8 @@ spec:
               cpu: 2000m
               memory: 2Gi
             requests:
-              cpu: 1000m
-              memory: 1Gi
+              cpu: 200m
+              memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

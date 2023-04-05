@@ -49,6 +49,13 @@ parameters:
         managementPolicy: Basic
       xfn:
         enabled: true
+        args:
+          - --debug
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
       args:
         - '--enable-composition-functions'
         - '--enable-environment-configs'
+        - '--debug'
